@@ -10,15 +10,15 @@ export default function(state = defaultState, action) {
   switch (action.type) {
     case GET_PART_SNAPSHOT:
       obj = defaultState;
-      obj.participants = {...action.payload};
+      obj.participants = action.payload;
       return Object.assign({}, obj);
     case GET_ORG_SNAPSHOT:
       obj = defaultState;
-      obj.organisers = {...action.payload};
+      obj.organisers = action.payload;
       return Object.assign({}, obj);
     case GET_CHAL_SNAPSHOT:
       obj = defaultState;
-      obj.challenges = {...action.payload};
+      obj.challenges = action.payload;
       return Object.assign({}, obj);
     default:
       return state;
