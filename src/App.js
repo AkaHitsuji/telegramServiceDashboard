@@ -5,9 +5,10 @@ import Login from 'components/Login';
 import 'App.css';
 
 class App extends Component {
-  state = {authenticated: true}
+  state = {authenticated: false}
   onToggle = () => {
-    this.setState({authenticated: true});
+    this.state.authenticated ? this.setState({authenticated: false}) : this.setState({authenticated: true});
+    // this.setState({authenticated: true});
   }
   render() {
     return (
