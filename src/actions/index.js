@@ -7,7 +7,9 @@ export const getParticipantSnapshot = () => {
         .then((snapshot) => {
           const documents = [];
           snapshot.forEach((doc) => {
-            documents.push(doc.data());
+            const dat = doc.data();
+            dat['id'] = doc.id;
+            documents.push(dat);
           });
           dispatch({type: GET_PART_SNAPSHOT, payload: documents});
         }).catch((err) => {
@@ -24,7 +26,9 @@ export const getOrganiserSnapshot = () => {
         .then((snapshot) => {
           const documents = [];
           snapshot.forEach((doc) => {
-            documents.push(doc.data());
+            const dat = doc.data();
+            dat['id'] = doc.id;
+            documents.push(dat);
           });
           dispatch({type: GET_ORG_SNAPSHOT, payload: documents});
         }).catch((err) => {
