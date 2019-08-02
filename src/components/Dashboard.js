@@ -7,6 +7,11 @@ import 'react-table/react-table.css';
 import {Tab, Tabs, TabList, TabPanel} from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import matchSorter from 'match-sorter';
+import {css} from '@emotion/core';
+import {RiseLoader} from 'react-spinners';
+import AddModal from 'components/AddModal';
+import DeleteModal from 'components/DeleteModal';
+import {Button, Icon} from 'semantic-ui-react';
 
 class Dashboard extends Component {
   componentDidMount() {
@@ -55,8 +60,22 @@ class Dashboard extends Component {
       accessor: 'name',
       filterMethod: (filter, rows) => matchSorter(rows, filter.value, {keys: ['name']}),
       filterAll: true,
+    }, {
+      Header: 'Delete',
+      filterable: false,
+      Cell: (props) => {
+        console.log('props:', props);
+        return (
+          <DeleteModal/>
+        );
+      },
     }];
 
+    const override = css`
+      display: block;
+      margin: 0 auto;
+      border-color: #FFC900;`;
+          
     const tabList = this.props.challenges.map((challenge, index) => {
       return <Tab> Challenge {index+1}</Tab>;
     });
@@ -109,7 +128,16 @@ class Dashboard extends Component {
         </Tabs>
       );
     } else {
-      return 'loading';
+      return (
+        <div className='sweet-loading App-center'>
+          <RiseLoader
+            css={override}
+            sizeUnit={'px'}
+            size={15}
+            color={'#FFC900'}
+          />
+        </div>
+      );
     }
   };
 
@@ -118,10 +146,19 @@ class Dashboard extends Component {
       <div>
 
         <header className="App-header">
-          <p>Organiser Dashboard</p>
+          <div className="button-container">
+            <Button className='button-style' onClick={this.clickHandler}><Icon name='refresh' />Update</Button>
+          </div>
+          <div className='title-container'>
+            <p className='dashboard-title'>Organiser Dashboard</p>
+          </div>
+          <div className="button-container">
+            <Button className='button-style'>Sign Out</Button>
+          </div>
         </header>
-        <button onClick={this.clickHandler}>Update</button>
-        {this.dataTabs()}
+        <div className="col-md-12">
+          {this.dataTabs()}
+        </div>
       </div>
     );
   }
