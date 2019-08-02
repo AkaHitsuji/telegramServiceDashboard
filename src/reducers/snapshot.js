@@ -1,4 +1,4 @@
-import {GET_PART_SNAPSHOT, GET_ORG_SNAPSHOT, GET_CHAL_SNAPSHOT} from 'actions/types';
+import {GET_PART_SNAPSHOT, GET_ORG_SNAPSHOT, GET_CHAL_SNAPSHOT, GET_ORG_FROM_REF} from 'actions/types';
 const defaultState = {
   organisers: [],
   participants: [],
@@ -20,6 +20,13 @@ export default function(state = defaultState, action) {
       obj = defaultState;
       console.log(action.payload);
       obj.challenges = action.payload;
+      return Object.assign({}, obj);
+    case GET_ORG_FROM_REF:
+      obj = state;
+      const challenges = state.challenges;
+      const {data, challengeIndex} = action.payload;
+      challenges[challengeIndex]['organiserName'] = data;
+      obj.challenges = challenges;
       return Object.assign({}, obj);
     default:
       return state;
