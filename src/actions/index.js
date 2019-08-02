@@ -1,4 +1,4 @@
-import {GET_PART_SNAPSHOT, GET_ORG_SNAPSHOT, GET_CHAL_SNAPSHOT} from 'actions/types';
+import {GET_PART_SNAPSHOT, GET_ORG_SNAPSHOT, GET_CHAL_SNAPSHOT, GET_ORG_FROM_REF} from 'actions/types';
 
 export const getParticipantSnapshot = () => {
   return (dispatch, getState, {getFirestore}) => {
@@ -77,6 +77,21 @@ export const updateChallenges = (docs) => {
 
     updateChallenges().then(() => {
       dispatch(getOrganiserSnapshot());
+    });
+  };
+};
+
+export const getOrgFromRef = (refs, challengeIndex) => {
+  return (dispatch, getState, {getFirestore}) => {
+    const getChallenge = async (ref) => {
+      const document = await ref.get();
+      return document.data();
+    };
+    const updateChallenges = async () => {
+      return await Promise.all(refs.map((ref) => getChallenge(ref)));
+    };
+    updateChallenges().then((data) => {
+      dispatch({type: GET_ORG_FROM_REF, payload: {data, challengeIndex}});
     });
   };
 };
