@@ -66,7 +66,7 @@ class Dashboard extends Component {
       Cell: (props) => {
         console.log('props:', props);
         return (
-          <DeleteModal/>
+          <DeleteModal challenge={props.original.challenge} organiser={props.original.orgIndex}/>
         );
       },
     }];
@@ -75,28 +75,26 @@ class Dashboard extends Component {
       display: block;
       margin: 0 auto;
       border-color: #FFC900;`;
-          
-    const tabList = this.props.challenges.map((challenge, index) => {
+
+    const challengeTabList = this.props.challenges.map((challenge, index) => {
       return <Tab> Challenge {index+1}</Tab>;
     });
 
     const tabPanelList = this.props.challenges.map((challenge, index) => {
+      console.log(challenge);
       if (challenge.organisers.length > 0) {
-        this.props.getOrgFromRef(challenge.organisers, index);
-        if (!!challenge.organiserName) {
-          console.log(challenge.organiserName);
-          return (
-            <TabPanel>
-              <ReactTable className="-striped -highlight" columns={challengeColumns} data={challenge.organiserName} filterable/>
-            </TabPanel>
-          );
-        } else {
-          return (
-            <TabPanel>
-              <ReactTable className="-striped -highlight" columns={challengeColumns} data={['loading']} filterable/>
-            </TabPanel>
-          );
-        }
+        console.log(challenge);
+        const orgData = challenge.organisers.map((name, orgIndex) => {
+          name['challenge'] = index;
+          name['orgIndex'] = orgIndex;
+          return name;
+        });
+
+        return (
+          <TabPanel>
+            <ReactTable className="-striped -highlight" columns={challengeColumns} data={orgData} filterable/>
+          </TabPanel>
+        );
       } else {
         return (
           <TabPanel>
@@ -120,7 +118,7 @@ class Dashboard extends Component {
           <TabPanel>
             <Tabs forceRenderTabPanel defaultIndex={0}>
               <TabList>
-                {tabList}
+                {challengeTabList}
               </TabList>
               {tabPanelList}
             </Tabs>
