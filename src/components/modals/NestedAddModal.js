@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Button, Icon, Modal} from 'semantic-ui-react';
-import NewOrganiserModal from 'components/NewOrganiserModal';
+import NewOrganiserModal from 'components/modals/NewOrganiserModal';
+import AddToChallengeModal from 'components/modals/AddToChallengeModal';
 
 class NestedAddModal extends Component {
   constructor({
@@ -36,7 +37,7 @@ class NestedAddModal extends Component {
     return (
       <React.Fragment>
         <NewOrganiserModal />
-        <NewOrganiserModal />
+        <AddToChallengeModal />
       </React.Fragment>
     );
   }
@@ -44,12 +45,18 @@ class NestedAddModal extends Component {
 
 const AddModalMultiple = () => (
   <Modal
-    trigger={ <Button className='button-style' color='green'><Icon name='add' />Add</Button> } closeIcon
+    trigger={
+      <Button className='button-style' color='green' size='large' animated='vertical'>
+        <Button.Content visible><Icon name='add' />Add</Button.Content>
+        <Button.Content hidden>Open Add Page</Button.Content>
+      </Button>
+    }
+    closeIcon
     closeOnEscape = {true}
     closeOnDimmerClick = {true}
     className='modal-style'
     basic
-    size = 'small'
+    size = 'large'
   >
     <Modal.Header>Addition Page</Modal.Header>
     <Modal.Content>

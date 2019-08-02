@@ -9,8 +9,8 @@ import 'react-tabs/style/react-tabs.css';
 import matchSorter from 'match-sorter';
 import {css} from '@emotion/core';
 import {RiseLoader} from 'react-spinners';
-import NestedAddModal from 'components/NestedAddModal';
-import DeleteModal from 'components/DeleteModal';
+import NestedAddModal from 'components/modals/NestedAddModal';
+import DeleteModal from 'components/modals/DeleteModal';
 import {Button, Icon} from 'semantic-ui-react';
 
 class Dashboard extends Component {
@@ -158,7 +158,12 @@ class Dashboard extends Component {
             <p className='dashboard-title'>Organiser Dashboard</p>
           </div>
           <div className="button-container">
-            <Button className='button-style' color='red' onClick={this.signOut}>Sign Out</Button>
+            <Button animated className='button-style' color='red' onClick={this.signOut} size='large'>
+              <Button.Content visible>Sign Out</Button.Content>
+              <Button.Content hidden>
+                <Icon name='times' />
+              </Button.Content>
+            </Button>
           </div>
         </header>
         <div className="col-md-12">
