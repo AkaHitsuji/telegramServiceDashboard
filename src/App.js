@@ -13,7 +13,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        {this.state.authenticated ? <Dashboard /> : <Login onToggle={this.onToggle}/>}
+        {this.state.authenticated ? <Dashboard onToggle={this.onToggle} /> : <Login onToggle={this.onToggle}/>}
       </div>
     );
   }
