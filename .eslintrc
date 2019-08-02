@@ -3,6 +3,7 @@
     "rules": {
         "max-len": ["error", { "code": 200 }],
         "linebreak-style": 0,
-        "require-jsdoc": 0
+        "require-jsdoc": 0,
+        "no-invalid-this": 0
       }
 }

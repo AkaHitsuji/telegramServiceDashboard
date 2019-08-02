@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {getParticipantSnapshot, getOrganiserSnapshot, getChallengesSnapshot} from 'actions';
+import axios from 'axios';
+import {getParticipantSnapshot, getOrganiserSnapshot, updateChallenges, getChallengesSnapshot} from 'actions';
 import ReactTable from 'react-table';
 import 'react-table/react-table.css';
 import {Tab, Tabs, TabList, TabPanel} from 'react-tabs';
@@ -12,6 +13,15 @@ class Dashboard extends Component {
     this.props.getParticipantSnapshot();
     this.props.getOrganiserSnapshot();
     this.props.getChallengesSnapshot();
+  }
+  
+  clickHandler = () => {
+    axios.get('https://codeit-suisse-coordinator2019.herokuapp.com/api/challenges')
+        .then((res) => {
+          const data = res.data;
+          this.props.updateChallenges(data);
+          // populate database
+        });
   }
 
   dataTabs = () => {
@@ -94,9 +104,11 @@ class Dashboard extends Component {
   render() {
     return (
       <div>
+
         <header className="App-header">
           <p>Organiser Dashboard</p>
         </header>
+        <button onClick={this.clickHandler}>Update</button>
         {this.dataTabs()}
       </div>
     );
@@ -106,6 +118,7 @@ const mapDispatchToProps = {
   getParticipantSnapshot,
   getOrganiserSnapshot,
   getChallengesSnapshot,
+  updateChallenges,
 };
 
 const mapStateToProps = (state) => {
