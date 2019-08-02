@@ -82,3 +82,8 @@
   position: relative;
   top: 20%;
 }
+
+.actions {
+  float: left;
+  text-align: left;
+}

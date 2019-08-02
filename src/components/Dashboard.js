@@ -9,7 +9,7 @@ import 'react-tabs/style/react-tabs.css';
 import matchSorter from 'match-sorter';
 import {css} from '@emotion/core';
 import {RiseLoader} from 'react-spinners';
-import AddModal from 'components/AddModal';
+import NestedAddModal from 'components/NestedAddModal';
 import DeleteModal from 'components/DeleteModal';
 import {Button, Icon} from 'semantic-ui-react';
 
@@ -18,6 +18,11 @@ class Dashboard extends Component {
     this.props.getParticipantSnapshot();
     this.props.getOrganiserSnapshot();
     this.props.getChallengesSnapshot();
+  }
+
+  signOut = (event) => {
+    event.preventDefault();
+    this.props.onToggle();
   }
 
   clickHandler = () => {
@@ -75,7 +80,7 @@ class Dashboard extends Component {
       display: block;
       margin: 0 auto;
       border-color: #FFC900;`;
-          
+
     const tabList = this.props.challenges.map((challenge, index) => {
       return <Tab> Challenge {index+1}</Tab>;
     });
@@ -147,17 +152,17 @@ class Dashboard extends Component {
 
         <header className="App-header">
           <div className="button-container">
-            <Button className='button-style' onClick={this.clickHandler}><Icon name='refresh' />Update</Button>
+            <NestedAddModal/>
           </div>
           <div className='title-container'>
             <p className='dashboard-title'>Organiser Dashboard</p>
           </div>
           <div className="button-container">
-            <Button className='button-style'>Sign Out</Button>
+            <Button className='button-style' color='red' onClick={this.signOut}>Sign Out</Button>
           </div>
         </header>
         <div className="col-md-12">
-          {this.dataTabs()}
+          {/* this.dataTabs() */}
         </div>
       </div>
     );

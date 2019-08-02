@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Button, Header, Image, Modal} from 'semantic-ui-react';
+import {Button, Header, Image, Modal, Icon} from 'semantic-ui-react';
 
 class AddModal extends Component {
   state = {
@@ -21,9 +21,7 @@ class AddModal extends Component {
 
     return (
       <div>
-        <Button onClick={this.show(true)}>Default</Button>
-        <Button onClick={this.show('inverted')}>Inverted</Button>
-        <Button onClick={this.show('blurring')}>Blurring</Button>
+        <Button onClick={this.show(true)} color='green'><Icon name='add' />Add</Button>
 
         <Modal dimmer={dimmer} open={open} onClose={this.close}>
           <Modal.Header>Select a Photo</Modal.Header>

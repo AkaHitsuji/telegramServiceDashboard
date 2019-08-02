@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Button, Header, Icon, Modal} from 'semantic-ui-react';
 
-class DeleteModal extends Component {
+class NewOrganiserModal extends Component {
   state = {
     open: false,
   }
@@ -20,19 +20,18 @@ class DeleteModal extends Component {
 
   render() {
     return (
-      <div>
-        <Button onClick={this.show}>Delete</Button>
-
+      <React.Fragment>
+        <Button onClick={this.show} color="pink" inverted>Add New Organiser</Button>
         <Modal
           open={this.state.open}
           onClose={this.close}
           basic
           size='small'
         >
-          <Header icon='trash alternate' content='Remove Organiser' />
+          <Header icon='add' content='Add New Organiser' />
           <Modal.Content>
             <p>
-              Are you sure you want to remove (this organiser) from (this challenge)?
+              Put add functions here.
             </p>
           </Modal.Content>
           <Modal.Actions>
@@ -44,9 +43,9 @@ class DeleteModal extends Component {
             </Button>
           </Modal.Actions>
         </Modal>
-      </div>
+      </React.Fragment>
     );
   }
 }
 
-export default DeleteModal;
+export default NewOrganiserModal;
