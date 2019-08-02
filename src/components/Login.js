@@ -15,15 +15,15 @@ class Login extends Component {
   render() {
     return (
       <div>
-        <div class="main-container">
+        <div className="main-container">
           {/* logo container */}
-          <div class="col-md-12">
-            <div class="logo">
+          <div className="col-md-12">
+            <div className="logo">
               <img src={logo} alt="Logo" />
             </div>
           </div>
           {/* username and password input */}
-          <form class="form">
+          <form className="form">
             <input type="text" placeholder="Username"/>
             <input type="password" placeholder="Password"/>
           </form>

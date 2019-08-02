@@ -14,19 +14,18 @@ class Dashboard extends Component {
     this.props.getChallengesSnapshot();
   }
 
-  render() {
+  dataTabs = () => {
     const participantColumns = [{
       Header: 'Name',
       accessor: 'name',
-      filterMethod: (filter, rows) => matchSorter(rows, filter.value, {keys: ['name']}),
+      filterMethod: (filter, rows) =>
+        matchSorter(rows, filter.value, {keys: ['name']}),
       filterAll: true,
-      id: 'partiCol1',
     }, {
       Header: 'Telegram Name',
       accessor: 'id',
       filterMethod: (filter, rows) => matchSorter(rows, filter.value, {keys: ['id']}),
       filterAll: true,
-      id: 'partiCol2',
     }];
 
     const organiserColumns = [{
@@ -34,13 +33,11 @@ class Dashboard extends Component {
       accessor: 'name',
       filterMethod: (filter, rows) => matchSorter(rows, filter.value, {keys: ['name']}),
       filterAll: true,
-      id: 'orgCol1',
     }, {
       Header: 'Telegram Name',
       accessor: 'id',
       filterMethod: (filter, rows) => matchSorter(rows, filter.value, {keys: ['id']}),
       filterAll: true,
-      id: 'orgCol2',
     }];
 
     const challengeColumns = [{
@@ -48,59 +45,59 @@ class Dashboard extends Component {
       accessor: 'name',
       filterMethod: (filter, rows) => matchSorter(rows, filter.value, {keys: ['name']}),
       filterAll: true,
-      id: 'chaCol1',
-    }, {
-      Header: 'Telegram Name',
-      accessor: 'id',
-      filterMethod: (filter, rows) => matchSorter(rows, filter.value, {keys: ['id']}),
-      filterAll: true,
-      id: 'chaCol2',
     }];
+    const loaded = this.props.participants.length>0 && this.props.organisers.length>0 && this.props.challenges.length>0;
+    console.log(loaded)
+    if (loaded) {
+      return (
+        <Tabs defaultIndex={0} onSelect={(tabIndex) => this.setState({tabIndex})}>
+          <TabList>
+            <Tab>Particpants</Tab>
+            <Tab>Organisers</Tab>
+            <Tab>Challenges</Tab>
+          </TabList>
+          <TabPanel><ReactTable className="-striped -highlight" columns={participantColumns} data={this.props.participants} filterable/></TabPanel>
+          <TabPanel><ReactTable className="-striped -highlight" columns={organiserColumns} data={this.props.organisers} filterable/></TabPanel>
+          <TabPanel>
+            <Tabs forceRenderTabPanel defaultIndex={0}>
+              <TabList>
+                <Tab>Challenge 1</Tab>
+                <Tab>Challenge 2</Tab>
+                <Tab>Challenge 3</Tab>
+                <Tab>Challenge 4</Tab>
+                <Tab>Challenge 5</Tab>
+                <Tab>Challenge 6</Tab>
+                <Tab>Challenge 7</Tab>
+                <Tab>Challenge 8</Tab>
+                <Tab>Challenge 9</Tab>
+                <Tab>Challenge 10</Tab>
+              </TabList>
+              <TabPanel><ReactTable className="-striped -highlight" columns={challengeColumns} data={this.props.challenges[0].organisers} filterable/></TabPanel>
+              <TabPanel><ReactTable className="-striped -highlight" columns={challengeColumns} data={this.props.challenge2} filterable/></TabPanel>
+              <TabPanel><ReactTable className="-striped -highlight" columns={challengeColumns} data={this.props.challenge3} filterable/></TabPanel>
+              <TabPanel><ReactTable className="-striped -highlight" columns={challengeColumns} data={this.props.challenge4} filterable/></TabPanel>
+              <TabPanel><ReactTable className="-striped -highlight" columns={challengeColumns} data={this.props.challenge5} filterable/></TabPanel>
+              <TabPanel><ReactTable className="-striped -highlight" columns={challengeColumns} data={this.props.challenge6} filterable/></TabPanel>
+              <TabPanel><ReactTable className="-striped -highlight" columns={challengeColumns} data={this.props.challenge7} filterable/></TabPanel>
+              <TabPanel><ReactTable className="-striped -highlight" columns={challengeColumns} data={this.props.challenge8} filterable/></TabPanel>
+              <TabPanel><ReactTable className="-striped -highlight" columns={challengeColumns} data={this.props.challenge9} filterable/></TabPanel>
+              <TabPanel><ReactTable className="-striped -highlight" columns={challengeColumns} data={this.props.challenge10} filterable/></TabPanel>
+            </Tabs>
+          </TabPanel>
+        </Tabs>
+      );
+    } else {
+      return 'loading';
+    }
+  };
 
-    const dataTabs = (
-      <Tabs defaultIndex={0} onSelect={(tabIndex) => this.setState({tabIndex})}>
-        <TabList>
-          <Tab>Particpants</Tab>
-          <Tab>Organisers</Tab>
-          <Tab>Challenges></Tab>
-        </TabList>
-        <TabPanel><ReactTable className="-striped -highlight" columns={participantColumns} data={this.props.participants} filterable/></TabPanel>
-        <TabPanel><ReactTable className="-striped -highlight" columns={organiserColumns} data={this.props.organisers} filterable/></TabPanel>
-        <TabPanel>
-          <Tabs forceRenderTabPanel defaultIndex={0}>
-            <TabList>
-              <Tab>Challenge 1</Tab>
-              <Tab>Challenge 2</Tab>
-              <Tab>Challenge 3</Tab>
-              <Tab>Challenge 4</Tab>
-              <Tab>Challenge 5</Tab>
-              <Tab>Challenge 6</Tab>
-              <Tab>Challenge 7</Tab>
-              <Tab>Challenge 8</Tab>
-              <Tab>Challenge 9</Tab>
-              <Tab>Challenge 10</Tab>
-            </TabList>
-            <TabPanel><ReactTable className="-striped -highlight" columns={challengeColumns} data={this.props.challenge1} filterable/></TabPanel>
-            <TabPanel><ReactTable className="-striped -highlight" columns={challengeColumns} data={this.props.challenge2} filterable/></TabPanel>
-            <TabPanel><ReactTable className="-striped -highlight" columns={challengeColumns} data={this.props.challenge3} filterable/></TabPanel>
-            <TabPanel><ReactTable className="-striped -highlight" columns={challengeColumns} data={this.props.challenge4} filterable/></TabPanel>
-            <TabPanel><ReactTable className="-striped -highlight" columns={challengeColumns} data={this.props.challenge5} filterable/></TabPanel>
-            <TabPanel><ReactTable className="-striped -highlight" columns={challengeColumns} data={this.props.challenge6} filterable/></TabPanel>
-            <TabPanel><ReactTable className="-striped -highlight" columns={challengeColumns} data={this.props.challenge7} filterable/></TabPanel>
-            <TabPanel><ReactTable className="-striped -highlight" columns={challengeColumns} data={this.props.challenge8} filterable/></TabPanel>
-            <TabPanel><ReactTable className="-striped -highlight" columns={challengeColumns} data={this.props.challenge9} filterable/></TabPanel>
-            <TabPanel><ReactTable className="-striped -highlight" columns={challengeColumns} data={this.props.challenge10} filterable/></TabPanel>
-          </Tabs>
-        </TabPanel>
-      </Tabs>
-    );
-
+  render() {
     return (
       <div>
         <header className="App-header">
           <p>Organiser Dashboard</p>
         </header>
-        {dataTabs}
+        {this.dataTabs()}
       </div>
     );
   }
