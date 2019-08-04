@@ -31,6 +31,8 @@ class Dashboard extends Component {
           const data = res.data;
           this.props.updateChallenges(data);
           // populate database
+        }).catch((err) => {
+          console.log('Error in connection.');
         });
   }
 
