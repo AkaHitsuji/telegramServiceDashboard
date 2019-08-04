@@ -23,10 +23,8 @@ export default function(state = defaultState, action) {
       return Object.assign({}, obj);
     case GET_ORG_FROM_REF:
       obj = state;
-      const challenges = state.challenges;
-      const {data, challengeIndex} = action.payload;
-      challenges[challengeIndex]['organiserName'] = data;
-      obj.challenges = challenges;
+      console.log(action.payload);
+      obj.challenges = action.payload;
       return Object.assign({}, obj);
     default:
       return state;
