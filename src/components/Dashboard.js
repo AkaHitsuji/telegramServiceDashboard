@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import axios from 'axios';
-import {getParticipantSnapshot, getOrganiserSnapshot, updateChallenges, getChallengesSnapshot, getOrgFromRef} from 'actions';
+import {getParticipantSnapshot, getOrganiserSnapshot, updateChallenges, getChallengesSnapshot} from 'actions';
 import ReactTable from 'react-table';
 import 'react-table/react-table.css';
 import {Tab, Tabs, TabList, TabPanel} from 'react-tabs';
@@ -167,7 +167,7 @@ class Dashboard extends Component {
           </div>
         </header>
         <div className="col-md-12">
-          {/* this.dataTabs() */}
+          {this.dataTabs()}
         </div>
       </div>
     );
@@ -178,7 +178,6 @@ const mapDispatchToProps = {
   getOrganiserSnapshot,
   getChallengesSnapshot,
   updateChallenges,
-  getOrgFromRef,
 };
 
 const mapStateToProps = (state) => {
