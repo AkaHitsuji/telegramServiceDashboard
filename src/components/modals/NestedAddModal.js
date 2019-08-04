@@ -46,7 +46,7 @@ class NestedAddModal extends Component {
 const AddModalMultiple = () => (
   <Modal
     trigger={
-      <Button className='button-style' color='green' size='large' animated='vertical'>
+      <Button className='button-style' color='olive' size='large' animated='vertical'>
         <Button.Content visible><Icon name='add' />Add</Button.Content>
         <Button.Content hidden>Open Add Page</Button.Content>
       </Button>

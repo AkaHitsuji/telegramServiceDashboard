@@ -39,47 +39,47 @@ class Dashboard extends Component {
 
   dataTabs = () => {
     const participantColumns = [{
-      Header: 'Name',
+      Header: 'NAME',
       accessor: 'name',
       filterMethod: (filter, rows) =>
         matchSorter(rows, filter.value, {keys: ['name']}),
       filterAll: true,
     }, {
-      Header: 'Telegram Name',
+      Header: 'TELEGRAM NAME',
       accessor: 'id',
       filterMethod: (filter, rows) => matchSorter(rows, filter.value, {keys: ['id']}),
       filterAll: true,
     }];
 
     const organiserColumns = [{
-      Header: 'Name',
+      Header: 'NAME',
       accessor: 'name',
       filterMethod: (filter, rows) => matchSorter(rows, filter.value, {keys: ['name']}),
       filterAll: true,
     }, {
-      Header: 'Telegram Name',
+      Header: 'TELEGRAM NAME',
       accessor: 'id',
       filterMethod: (filter, rows) => matchSorter(rows, filter.value, {keys: ['id']}),
       filterAll: true,
     }];
 
     const challengeColumns = [{
-      Header: 'Name',
+      Header: 'NAME',
       accessor: 'name',
       filterMethod: (filter, rows) => matchSorter(rows, filter.value, {keys: ['name']}),
       filterAll: true,
     }, {
-      Header: 'Telegram Name',
+      Header: 'TELEGRAM NAME',
       accessor: 'name',
       filterMethod: (filter, rows) => matchSorter(rows, filter.value, {keys: ['name']}),
       filterAll: true,
     }, {
-      Header: 'Location',
+      Header: 'LOCATION',
       accessor: 'name',
       filterMethod: (filter, rows) => matchSorter(rows, filter.value, {keys: ['name']}),
       filterAll: true,
     }, {
-      Header: 'Delete',
+      Header: 'DELETE',
       filterable: false,
       Cell: (props) => {
         console.log('props:', props);
@@ -127,7 +127,7 @@ class Dashboard extends Component {
       return (
         <Tabs defaultIndex={0} onSelect={(tabIndex) => this.setState({tabIndex})}>
           <TabList>
-            <Tab>Particpants</Tab>
+            <Tab>Participants</Tab>
             <Tab>Organisers</Tab>
             <Tab>Challenges</Tab>
           </TabList>
@@ -167,15 +167,17 @@ class Dashboard extends Component {
             <div className="right-button"><UpdateModal/></div>
           </div>
           <div className='title-container'>
-            <p className='dashboard-title'>Organiser Dashboard</p>
+            <p className='dashboard-title'>ORGANISER DASHBOARD</p>
           </div>
           <div className="button-container">
-            <Button animated className='button-style' color='red' onClick={this.signOut} size='large'>
-              <Button.Content visible>Sign Out</Button.Content>
-              <Button.Content hidden>
-                <Icon name='times' />
-              </Button.Content>
-            </Button>
+            <div className="right-button">
+              <Button animated className='button-style' color='blue' onClick={this.signOut} size='large'>
+                <Button.Content visible>Sign Out</Button.Content>
+                <Button.Content hidden>
+                  <Icon name='times' />
+                </Button.Content>
+              </Button>
+            </div>
           </div>
         </header>
         <div className="col-md-12">
