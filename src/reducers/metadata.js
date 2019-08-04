@@ -13,7 +13,7 @@ export default function(state = defaultState, action) {
       newState.loading = action.payload;
       return Object.assign({}, newState);
     case LOADING_FALSE:
-      newState.loading = action.payload;
+      newState.loading = null;
       return Object.assign({}, newState);
     default:
       return state;

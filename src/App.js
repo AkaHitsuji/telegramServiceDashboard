@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import Dashboard from 'components/Dashboard';
 import Login from 'components/Login';
 
@@ -18,5 +19,12 @@ class App extends Component {
     );
   }
 }
+const mapStateToProps = (state) => {
+  const {authenticated} = state.metadata;
+  return {
+    authenticated,
+  };
+};
 
-export default App;
+
+export default connect(mapStateToProps, null)(App);

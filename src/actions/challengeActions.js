@@ -1,4 +1,4 @@
-import {GET_CHAL_SNAPSHOT} from 'actions/types';
+import {GET_CHAL_SNAPSHOT, LOADING_TRUE, LOADING_FALSE} from 'actions/types';
 
 const getOrgFromRef = async (challenges) => {
   console.log('getting org from ref', challenges);
@@ -29,6 +29,7 @@ const getOrgFromRef = async (challenges) => {
 
 export const getChallengesSnapshot = async () => {
   return (dispatch, getState, {getFirestore}) => {
+    dispatch({type: LOADING_TRUE, payload: 'deleting org from challenge'});
     const firestore = getFirestore();
     firestore.collection('challenges').get()
         .then((snapshot) => {
@@ -41,6 +42,7 @@ export const getChallengesSnapshot = async () => {
           console.log(documents);
           getOrgFromRef(documents).then((dat) => {
             console.log(dat);
+            dispatch({type: LOADING_FALSE, payload: 'deleting org from challenge'});
             dispatch({type: GET_CHAL_SNAPSHOT, payload: dat});
           });
         }).catch((err) => {
@@ -76,6 +78,7 @@ export const updateChallenges = (docs) => {
 
 export const deleteOrgFromChallenge = (challengeId, organiserId) => {
   return (dispatch, getState, {getFirestore}) => {
+    dispatch({type: LOADING_TRUE, payload: 'deleting org from challenge'});
     console.log('deleting org from challenge');
     const state = getState();
     const firestore = getFirestore();
@@ -99,6 +102,7 @@ export const deleteOrgFromChallenge = (challengeId, organiserId) => {
     // update database
     ref.set(challenge, {merge: true}).then((res) => {
       dispatch(getChallengesSnapshot());
+      dispatch({type: LOADING_FALSE});
     });
   };
 };
