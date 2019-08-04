@@ -21,13 +21,14 @@ export const getOrganiserSnapshot = async () => {
 
 export const addOrganiser = (orgId, name) => {
   return (dispatch, getState, {getFirestore}) => {
+    console.log('adding organiser');
     dispatch({type: LOADING_TRUE, payload: 'Adding an organiser into the system'});
     const firestore = getFirestore();
     const orgRef = firestore.collection('organisers').doc(orgId);
     const data = {name, chatID: ''};
     orgRef.set(data, {merge: true}).then((res) => {
       dispatch({type: LOADING_FALSE});
-      dispatch(getOrganiserSnapshot);
+      dispatch(getOrganiserSnapshot());
     });
   };
 };

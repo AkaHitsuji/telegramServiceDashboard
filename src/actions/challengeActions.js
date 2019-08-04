@@ -13,7 +13,6 @@ const getOrgFromRef = async (challenges) => {
 
   // get all organisers from array of references
   const getOrganisers = async (challenge) => {
-    console.log(challenge.organisers);
     const org = await Promise.all(challenge.organisers.map((ref) => getOrgRef(ref)));
     challenge.organisers = org;
     return challenge;
@@ -54,6 +53,7 @@ export const getChallengesSnapshot = async () => {
 export const updateChallenges = (docs) => {
   return (dispatch, getState, {getFirestore}) => {
     console.log('updating challenges');
+    dispatch({action: LOADING_TRUE, payload: 'Importing challenges'});
     const state = getState();
     const challenges = state.snapshot.challenges;
     const challengeNames = challenges.map((chal) => {

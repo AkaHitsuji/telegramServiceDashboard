@@ -99,9 +99,7 @@ class Dashboard extends Component {
     });
 
     const tabPanelList = this.props.challenges.map((challenge, index) => {
-      console.log(challenge);
       if (challenge.organisers.length > 0) {
-        console.log(challenge);
         const orgData = challenge.organisers.map((name, orgIndex) => {
           name['challenge'] = index;
           name['orgIndex'] = orgIndex;
