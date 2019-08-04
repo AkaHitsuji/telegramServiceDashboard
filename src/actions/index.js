@@ -1,5 +1,5 @@
 
-export {getChallengesSnapshot, updateChallenges, deleteOrgFromChallenge} from 'actions/challengeActions';
+export {getChallengesSnapshot, updateChallenges, deleteOrgFromChallenge, addOrgToChallenge} from 'actions/challengeActions';
 
 export {getParticipantSnapshot} from 'actions/participantActions';
 

@@ -149,7 +149,6 @@ class Dashboard extends Component {
   render() {
     return (
       <div>
-
         <header className="App-header">
           <div className="button-container">
             <NestedAddModal/>

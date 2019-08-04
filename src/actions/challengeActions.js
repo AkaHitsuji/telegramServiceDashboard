@@ -29,7 +29,6 @@ const getOrgFromRef = async (challenges) => {
 
 export const getChallengesSnapshot = async () => {
   return (dispatch, getState, {getFirestore}) => {
-    dispatch({type: LOADING_TRUE, payload: 'deleting org from challenge'});
     const firestore = getFirestore();
     firestore.collection('challenges').get()
         .then((snapshot) => {
@@ -42,7 +41,6 @@ export const getChallengesSnapshot = async () => {
           console.log(documents);
           getOrgFromRef(documents).then((dat) => {
             console.log(dat);
-            dispatch({type: LOADING_FALSE, payload: 'deleting org from challenge'});
             dispatch({type: GET_CHAL_SNAPSHOT, payload: dat});
           });
         }).catch((err) => {
@@ -78,7 +76,7 @@ export const updateChallenges = (docs) => {
 
 export const deleteOrgFromChallenge = (challengeId, organiserId) => {
   return (dispatch, getState, {getFirestore}) => {
-    dispatch({type: LOADING_TRUE, payload: 'deleting org from challenge'});
+    dispatch({type: LOADING_TRUE, payload: 'Deleting organisers from challenge'});
     console.log('deleting org from challenge');
     const state = getState();
     const firestore = getFirestore();
@@ -101,6 +99,37 @@ export const deleteOrgFromChallenge = (challengeId, organiserId) => {
 
     // update database
     ref.set(challenge, {merge: true}).then((res) => {
+      dispatch(getChallengesSnapshot());
+      dispatch({type: LOADING_FALSE});
+    });
+  };
+};
+
+export const addOrgToChallenge = (challengeId, orgId) => {
+  return (dispatch, getState, {getFirestore}) => {
+    dispatch({type: LOADING_TRUE, payload: 'Deleting organisers from challenge'});
+    console.log('Adding organiser');
+    const firestore = getFirestore();
+    const state = getState();
+
+    // get challenge organisers from challengeId
+    const {challenges} = state.snapshot;
+    const challenge = challenges.filter((chal) => {
+      return chal.id === challengeId;
+    });
+    let {organisers} = challenge[0];
+    organisers = organisers.map((org) => {
+      return firestore.collection('organisers').doc(org.id);
+    });
+
+    // generate organiser reference and prepare organiser data
+    const orgRef = firestore.collection('organisers').doc(orgId);
+    organisers.push(orgRef);
+    const data = {organisers};
+
+    // add orgId to challenge in firestore
+    const chalRef = firestore.collection('challenges').doc(challengeId);
+    chalRef.set(data, {merge: true}).then((res) => {
       dispatch(getChallengesSnapshot());
       dispatch({type: LOADING_FALSE});
     });

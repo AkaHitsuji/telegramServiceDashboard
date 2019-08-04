@@ -1,9 +1,14 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import {Button, Header, Icon, Modal, Form} from 'semantic-ui-react';
+
+import {addOrgToChallenge} from 'actions';
 
 class AddToChallengeModal extends Component {
   state = {
     open: false,
+    organiserChoice: '',
+    challengechoice: '',
   }
 
   show = () => {
@@ -18,25 +23,40 @@ class AddToChallengeModal extends Component {
     });
   }
 
-  challengeOptions = [
-    {key: 1, text: 'Challenge 1', value: 'challenge1'},
-    {key: 2, text: 'Challenge 2', value: 'challenge2'},
-    {key: 3, text: 'Challenge 3', value: 'challenge3'},
-    {key: 4, text: 'Challenge 4', value: 'challenge4'},
-    {key: 5, text: 'Challenge 5', value: 'challenge5'},
-    {key: 6, text: 'Challenge 6', value: 'challenge6'},
-    {key: 7, text: 'Challenge 7', value: 'challenge7'},
-    {key: 8, text: 'Challenge 8', value: 'challenge8'},
-    {key: 9, text: 'Challenge 9', value: 'challenge9'},
-    {key: 10, text: 'Challenge 10', value: 'challenge10'},
-  ];
+  addOrganiser = () => {
+    this.close();
+    // add organiser
+    const {challengeChoice, organiserChoice} = this.state;
+    this.props.addOrgToChallenge(challengeChoice, organiserChoice);
+  }
 
-  organiserOptions = [
-    {key: 0, text: 'Ang Yang', value: 'angyang'},
-    {key: 1, text: 'De Sheng', value: 'desheng'},
-    {key: 2, text: 'Jie Xun', value: 'jiexun'},
-    {key: 3, text: 'Dao Han', value: 'daohan'},
-  ];
+  challengeOptions = () => {
+    return this.props.challenges.map((challenge, key) => {
+      return {
+        key,
+        text: challenge.id,
+        value: challenge.id,
+      };
+    });
+  }
+
+  organiserOptions = () => {
+    return this.props.organisers.map((organiser, key) => {
+      return {
+        key,
+        text: organiser.name,
+        value: organiser.id,
+      };
+    });
+  }
+
+  setOrganiserChoice = (e, {value}) => {
+    this.setState({organiserChoice: value});
+  }
+
+  setChallengeChoice = (e, {value}) => {
+    this.setState({challengeChoice: value});
+  }
 
   render() {
     return (
@@ -51,15 +71,15 @@ class AddToChallengeModal extends Component {
           <Header icon='wpforms' content='Assign Existing Organiser to Challenge' />
           <Modal.Content>
             <Form size='large' key='large' inverted>
-              <Form.Select required label='Select Organiser' options={this.organiserOptions} placeholder='Organiser Name' />
-              <Form.Select required label='Select Challenge' options={this.challengeOptions} placeholder='Challenges' />
+              <Form.Select required label='Select Organiser' onChange={this.setOrganiserChoice} options={this.organiserOptions()} placeholder='Organiser Name' />
+              <Form.Select required label='Select Challenge' onChange={this.setChallengeChoice} options={this.challengeOptions()} placeholder='Challenges' />
             </Form>
           </Modal.Content>
           <Modal.Actions>
             <Button color='red' inverted onClick={this.close}>
               <Icon name='remove' /> Cancel
             </Button>
-            <Button color='green' inverted onClick={this.close}>
+            <Button color='green' inverted onClick={this.addOrganiser}>
               <Icon name='checkmark' /> Add
             </Button>
           </Modal.Actions>
@@ -69,4 +89,16 @@ class AddToChallengeModal extends Component {
   }
 }
 
-export default AddToChallengeModal;
+const mapStateToProps = (state) => {
+  const {organisers, challenges} = state.snapshot;
+  return {
+    organisers,
+    challenges,
+  };
+};
+
+const mapDispatchToProps = {
+  addOrgToChallenge,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddToChallengeModal);
