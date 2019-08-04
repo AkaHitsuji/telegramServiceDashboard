@@ -31,7 +31,7 @@
 }
 
 .App-header .title-container {
-  width: 60%;
+  width: 40%;
   display: table;
 }
 
@@ -43,9 +43,17 @@
 }
 
 .App-header .button-container {
-  width: 20%;
-  display: table;
+  width: 30%;
   text-align: center;
+  display: flex;
+}
+
+.App-header .button-container .left-button {
+  width: 45%;
+}
+
+.App-header .button-container .right-button {
+  width: 55%;
 }
 
 .App-header .button-style {

@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 
 import {deleteOrgFromChallenge} from 'actions';
 
-class DeleteModal extends Component {
+class UpdateModal extends Component {
   state = {
     open: false,
   }
@@ -28,10 +28,10 @@ class DeleteModal extends Component {
 
   render() {
     return (
-      <div>
-        <Button onClick={this.show} color='red' animated='vertical'>
-          <Button.Content visible>Delete</Button.Content>
-          <Button.Content hidden><Icon name='trash alternate' /></Button.Content>
+      <React.Fragment>
+        <Button className='button-style' onClick={this.show} color='olive' animated='vertical' size='large'>
+          <Button.Content visible><Icon name='sync alternate' />Update</Button.Content>
+          <Button.Content hidden>Update Challenges</Button.Content>
         </Button>
 
         <Modal
@@ -55,7 +55,7 @@ class DeleteModal extends Component {
             </Button>
           </Modal.Actions>
         </Modal>
-      </div>
+      </React.Fragment>
     );
   }
 }
@@ -64,4 +64,4 @@ const mapDispatchToProps = {
   deleteOrgFromChallenge,
 };
 
-export default connect(null, mapDispatchToProps)(DeleteModal);
+export default connect(null, mapDispatchToProps)(UpdateModal);

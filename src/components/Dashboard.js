@@ -8,10 +8,11 @@ import {Tab, Tabs, TabList, TabPanel} from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import matchSorter from 'match-sorter';
 import {css} from '@emotion/core';
+import {Button, Icon} from 'semantic-ui-react';
 import {RiseLoader} from 'react-spinners';
 import NestedAddModal from 'components/modals/NestedAddModal';
 import DeleteModal from 'components/modals/DeleteModal';
-import {Button, Icon} from 'semantic-ui-react';
+import UpdateModal from 'components/modals/UpdateModal';
 
 class Dashboard extends Component {
   componentDidMount() {
@@ -64,6 +65,16 @@ class Dashboard extends Component {
 
     const challengeColumns = [{
       Header: 'Name',
+      accessor: 'name',
+      filterMethod: (filter, rows) => matchSorter(rows, filter.value, {keys: ['name']}),
+      filterAll: true,
+    }, {
+      Header: 'Telegram Name',
+      accessor: 'name',
+      filterMethod: (filter, rows) => matchSorter(rows, filter.value, {keys: ['name']}),
+      filterAll: true,
+    }, {
+      Header: 'Location',
       accessor: 'name',
       filterMethod: (filter, rows) => matchSorter(rows, filter.value, {keys: ['name']}),
       filterAll: true,
@@ -152,7 +163,8 @@ class Dashboard extends Component {
 
         <header className="App-header">
           <div className="button-container">
-            <NestedAddModal/>
+            <div className="left-button"><NestedAddModal/></div>
+            <div className="right-button"><UpdateModal/></div>
           </div>
           <div className='title-container'>
             <p className='dashboard-title'>Organiser Dashboard</p>
@@ -167,7 +179,7 @@ class Dashboard extends Component {
           </div>
         </header>
         <div className="col-md-12">
-          {/* this.dataTabs() */}
+          {this.dataTabs()}
         </div>
       </div>
     );
