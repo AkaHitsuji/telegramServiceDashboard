@@ -9,8 +9,8 @@ import 'react-tabs/style/react-tabs.css';
 import matchSorter from 'match-sorter';
 import {css} from '@emotion/core';
 import {RiseLoader} from 'react-spinners';
-import AddModal from 'components/AddModal';
-import DeleteModal from 'components/DeleteModal';
+import NestedAddModal from 'components/modals/NestedAddModal';
+import DeleteModal from 'components/modals/DeleteModal';
 import {Button, Icon} from 'semantic-ui-react';
 
 class Dashboard extends Component {
@@ -20,12 +20,19 @@ class Dashboard extends Component {
     this.props.getChallengesSnapshot();
   }
 
+  signOut = (event) => {
+    event.preventDefault();
+    this.props.onToggle();
+  }
+
   clickHandler = () => {
     axios.get('https://codeit-suisse-coordinator2019.herokuapp.com/api/challenges')
         .then((res) => {
           const data = res.data;
           this.props.updateChallenges(data);
           // populate database
+        }).catch((err) => {
+          console.log('Error in connection.');
         });
   }
 
@@ -145,17 +152,22 @@ class Dashboard extends Component {
 
         <header className="App-header">
           <div className="button-container">
-            <Button className='button-style' onClick={this.clickHandler}><Icon name='refresh' />Update</Button>
+            <NestedAddModal/>
           </div>
           <div className='title-container'>
             <p className='dashboard-title'>Organiser Dashboard</p>
           </div>
           <div className="button-container">
-            <Button className='button-style'>Sign Out</Button>
+            <Button animated className='button-style' color='red' onClick={this.signOut} size='large'>
+              <Button.Content visible>Sign Out</Button.Content>
+              <Button.Content hidden>
+                <Icon name='times' />
+              </Button.Content>
+            </Button>
           </div>
         </header>
         <div className="col-md-12">
-          {this.dataTabs()}
+          {/* this.dataTabs() */}
         </div>
       </div>
     );

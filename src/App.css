@@ -10,7 +10,7 @@
 
 .App-header {
   background-color: #282c34;
-  height: 50px;
+  height: 100px;
   display:flex;
   flex-direction:row;
   align-items: center;
@@ -31,7 +31,7 @@
 }
 
 .App-header .title-container {
-  width: 80%;
+  width: 60%;
   display: table;
 }
 
@@ -43,14 +43,15 @@
 }
 
 .App-header .button-container {
-  height: 100%;
-  width: 10%;
+  width: 20%;
+  display: table;
   text-align: center;
 }
 
 .App-header .button-style {
   width: 80%;
-  padding: 5px;
+  display: table-cell;
+  margin: auto;
 }
 
 @keyframes App-logo-spin {
@@ -63,7 +64,7 @@
 }
 
 .ReactTable {
-  height: 800px;
+  height: 750px;
 }
 
 .ReactTable .rt-thead {
@@ -81,4 +82,9 @@
   display: inline-block !important;
   position: relative;
   top: 20%;
+}
+
+.actions {
+  float: left;
+  text-align: left;
 }

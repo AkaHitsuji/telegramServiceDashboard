@@ -12,9 +12,6 @@ class DeleteModal extends Component {
   show = () => {
     this.setState({
       open: true,
-    }, function() {
-      console.log('show is called');
-      console.log(this.state);
     });
   }
 
@@ -22,19 +19,14 @@ class DeleteModal extends Component {
     this.setState({
       open: false,
     });
-    console.log('close is called');
-    console.log(this.state);
   }
 
   delete = () => {
     this.close();
     this.props.deleteOrgFromChallenge(this.props.challenge, this.props.organiser);
   }
-  render() {
-    const {
-      open,
-    } = this.state;
 
+  render() {
     return (
       <div>
         <Button onClick={this.show}>Delete</Button>
