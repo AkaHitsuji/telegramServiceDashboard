@@ -41,6 +41,7 @@ export const getChallengesSnapshot = async () => {
           console.log(documents);
           getOrgFromRef(documents).then((dat) => {
             console.log(dat);
+            dispatch({type: LOADING_FALSE});
             dispatch({type: GET_CHAL_SNAPSHOT, payload: dat});
           });
         }).catch((err) => {
@@ -100,14 +101,13 @@ export const deleteOrgFromChallenge = (challengeId, organiserId) => {
     // update database
     ref.set(challenge, {merge: true}).then((res) => {
       dispatch(getChallengesSnapshot());
-      dispatch({type: LOADING_FALSE});
     });
   };
 };
 
 export const addOrgToChallenge = (challengeId, orgId) => {
   return (dispatch, getState, {getFirestore}) => {
-    dispatch({type: LOADING_TRUE, payload: 'Deleting organisers from challenge'});
+    dispatch({type: LOADING_TRUE, payload: `Adding an organiser to ${challengeId}`});
     console.log('Adding organiser');
     const firestore = getFirestore();
     const state = getState();
@@ -118,20 +118,30 @@ export const addOrgToChallenge = (challengeId, orgId) => {
       return chal.id === challengeId;
     });
     let {organisers} = challenge[0];
+
+    // check if organiser chosen is already in list
     organisers = organisers.map((org) => {
-      return firestore.collection('organisers').doc(org.id);
+      return org.id;
     });
+    const orgExists = organisers.includes(orgId);
 
-    // generate organiser reference and prepare organiser data
-    const orgRef = firestore.collection('organisers').doc(orgId);
-    organisers.push(orgRef);
-    const data = {organisers};
+    // generate organiser references and prepare organiser data
+    if (!orgExists) {
+      organisers = organisers.map((org) => {
+        return firestore.collection('organisers').doc(org);
+      });
+      const orgRef = firestore.collection('organisers').doc(orgId);
+      organisers.push(orgRef);
+      const data = {organisers};
 
-    // add orgId to challenge in firestore
-    const chalRef = firestore.collection('challenges').doc(challengeId);
-    chalRef.set(data, {merge: true}).then((res) => {
-      dispatch(getChallengesSnapshot());
+      // add orgId to challenge in firestore
+      const chalRef = firestore.collection('challenges').doc(challengeId);
+      chalRef.set(data, {merge: true}).then((res) => {
+        dispatch(getChallengesSnapshot());
+      });
+    } else {
+      // end the process
       dispatch({type: LOADING_FALSE});
-    });
+    }
   };
 };

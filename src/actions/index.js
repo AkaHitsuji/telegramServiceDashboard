@@ -3,4 +3,4 @@ export {getChallengesSnapshot, updateChallenges, deleteOrgFromChallenge, addOrgT
 
 export {getParticipantSnapshot} from 'actions/participantActions';
 
-export {getOrganiserSnapshot} from 'actions/organiserActions';
+export {getOrganiserSnapshot, addOrganiser} from 'actions/organiserActions';

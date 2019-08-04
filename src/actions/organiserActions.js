@@ -1,4 +1,4 @@
-import {GET_ORG_SNAPSHOT} from 'actions/types';
+import {GET_ORG_SNAPSHOT, LOADING_TRUE, LOADING_FALSE} from 'actions/types';
 
 export const getOrganiserSnapshot = async () => {
   return (dispatch, getState, {getFirestore}) => {
@@ -16,5 +16,18 @@ export const getOrganiserSnapshot = async () => {
           console.log(err);
           dispatch({type: 'CREATE_GOAL_ERROR', err});
         });
+  };
+};
+
+export const addOrganiser = (orgId, name) => {
+  return (dispatch, getState, {getFirestore}) => {
+    dispatch({type: LOADING_TRUE, payload: 'Adding an organiser into the system'});
+    const firestore = getFirestore();
+    const orgRef = firestore.collection('organisers').doc(orgId);
+    const data = {name, chatID: ''};
+    orgRef.set(data, {merge: true}).then((res) => {
+      dispatch({type: LOADING_FALSE});
+      dispatch(getOrganiserSnapshot);
+    });
   };
 };
