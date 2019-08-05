@@ -38,13 +38,13 @@ class UpdateModal extends Component {
           open={this.state.open}
           onClose={this.close}
           basic
-          size='small'
+          size='large'
         >
-          <Header icon='trash alternate' content='Remove Organiser' />
+          <Header icon='sync alternate' content='Update Challenges' />
           <Modal.Content>
-            <p>
-              Are you sure you want to remove (this organiser) from challenge {this.props.challenge + 1}?
-            </p>
+            <h5>
+              You will be updating this dashboard with the latest challenges pulled from the original database. Are you sure you want to proceed?
+            </h5>
           </Modal.Content>
           <Modal.Actions>
             <Button color='red' inverted onClick={this.close}>
