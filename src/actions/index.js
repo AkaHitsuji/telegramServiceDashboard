@@ -4,3 +4,5 @@ export {getChallengesSnapshot, updateChallenges, deleteOrgFromChallenge, addOrgT
 export {getParticipantSnapshot} from 'actions/participantActions';
 
 export {getOrganiserSnapshot, addOrganiser} from 'actions/organiserActions';
+
+export {performAuthentication, signOut} from 'actions/authenticationAction';

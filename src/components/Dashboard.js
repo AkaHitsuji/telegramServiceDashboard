@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import axios from 'axios';
-import {getParticipantSnapshot, getOrganiserSnapshot, updateChallenges, getChallengesSnapshot} from 'actions';
+import {getParticipantSnapshot, signOut, getOrganiserSnapshot, updateChallenges, getChallengesSnapshot} from 'actions';
 import ReactTable from 'react-table';
 import 'react-table/react-table.css';
 import {Tab, Tabs, TabList, TabPanel} from 'react-tabs';
@@ -21,9 +21,8 @@ class Dashboard extends Component {
     this.props.getChallengesSnapshot();
   }
 
-  signOut = (event) => {
-    event.preventDefault();
-    this.props.onToggle();
+  signOut = () => {
+    this.props.signOut();
   }
 
   clickHandler = () => {
@@ -185,6 +184,7 @@ class Dashboard extends Component {
   }
 }
 const mapDispatchToProps = {
+  signOut,
   getParticipantSnapshot,
   getOrganiserSnapshot,
   getChallengesSnapshot,
