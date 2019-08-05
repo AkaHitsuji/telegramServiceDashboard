@@ -19,13 +19,13 @@ export const getOrganiserSnapshot = async () => {
   };
 };
 
-export const addOrganiser = (orgId, name) => {
+export const addOrganiser = (name, orgId, location='') => {
   return (dispatch, getState, {getFirestore}) => {
     console.log('adding organiser');
     dispatch({type: LOADING_TRUE, payload: 'Adding an organiser into the system'});
     const firestore = getFirestore();
     const orgRef = firestore.collection('organisers').doc(orgId);
-    const data = {name, chatID: ''};
+    const data = {name, location, chatID: ''};
     orgRef.set(data, {merge: true}).then((res) => {
       dispatch({type: LOADING_FALSE});
       dispatch(getOrganiserSnapshot());

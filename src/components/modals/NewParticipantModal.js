@@ -2,14 +2,14 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Button, Header, Icon, Modal, Form} from 'semantic-ui-react';
 
-import {addOrganiser} from 'actions';
+import {addParticipants} from 'actions';
 
 class NewParticipantModal extends Component {
   state = {
     open: false,
     name: '',
     tgName: '',
-    location: '',
+    team: '',
   }
 
   show = () => {
@@ -33,10 +33,14 @@ class NewParticipantModal extends Component {
     this.setState({tgName: e.target.value});
   }
 
-  addOrg = () => {
+  setTeamName = (e) => {
+    this.setState({team: e.target.value});
+  }
+
+  addPart = () => {
     this.close();
-    const {name, tgName} = this.state;
-    this.props.addOrganiser(name, tgName);
+    const {name, tgName, team} = this.state;
+    this.props.addParticipants(name, tgName, team);
   }
 
   render() {
@@ -55,14 +59,14 @@ class NewParticipantModal extends Component {
               <Form.Input required fluid label='Name' onChange={this.setName} placeholder='Type your name here..' />
               <Form.Input required fluid label='Telegram Name' onChange={this.setTgName} placeholder='Type your Telegram username here..' />
               {/* TODO: setTgName change to set participant team name */}
-              <Form.Input required fluid label='Team Name' onChange={this.setTgName} placeholder='Type your Team Name here..' />
+              <Form.Input required fluid label='Team Name' onChange={this.setTeamName} placeholder='Type your Team Name here..' />
             </Form>
           </Modal.Content>
           <Modal.Actions>
             <Button color='red' inverted onClick={this.close}>
               <Icon name='remove' /> Cancel
             </Button>
-            <Button color='green' inverted onClick={this.addOrg}>
+            <Button color='green' inverted onClick={this.addPart}>
               <Icon name='checkmark' /> Add
             </Button>
           </Modal.Actions>
@@ -73,7 +77,7 @@ class NewParticipantModal extends Component {
 }
 
 const mapDispatchToProps = {
-  addOrganiser,
+  addParticipants,
 };
 
 export default connect(null, mapDispatchToProps)(NewParticipantModal);

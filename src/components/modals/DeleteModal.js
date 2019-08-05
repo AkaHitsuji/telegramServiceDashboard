@@ -2,11 +2,28 @@ import React, {Component} from 'react';
 import {Button, Header, Icon, Modal} from 'semantic-ui-react';
 import {connect} from 'react-redux';
 
-import {deleteOrgFromChallenge} from 'actions';
+import {deleteOrgFromChallenge, deleteParticipant} from 'actions';
 
 class DeleteModal extends Component {
   state = {
     open: false,
+    content: '',
+  }
+
+  componentDidMount() {
+    switch (this.props.type) {
+      case 'participant':
+        this.setState({content: 'Do you want to remove this participant?'});
+        break;
+      case 'organiser':
+        this.setState({content: 'Do you want to remove this organiser?'});
+        break;
+      case 'challenge':
+        this.setState({content: 'Are you sure you want to remove (this organiser) from challenge {this.props.challenge + 1}?'});
+        break;
+      default:
+        break;
+    }
   }
 
   show = () => {
@@ -23,7 +40,19 @@ class DeleteModal extends Component {
 
   delete = () => {
     this.close();
-    this.props.deleteOrgFromChallenge(this.props.challenge, this.props.organiser);
+    switch (this.props.type) {
+      case 'participant':
+        this.props.deleteParticipant(this.props.participant);
+        break;
+      case 'organiser':
+        this.setState({content: 'Do you want to remove this organiser?'});
+        break;
+      case 'challenge':
+        this.props.deleteOrgFromChallenge(this.props.challenge, this.props.organiser);
+        break;
+      default:
+        break;
+    }
   }
 
   render() {
@@ -40,10 +69,10 @@ class DeleteModal extends Component {
           basic
           size='small'
         >
-          <Header icon='trash alternate' content='Remove Organiser' />
+          <Header icon='trash alternate' content={`Remove ${this.props.type}`}/>
           <Modal.Content>
             <p>
-              Are you sure you want to remove (this organiser) from challenge {this.props.challenge + 1}?
+              {this.state.content}
             </p>
           </Modal.Content>
           <Modal.Actions>
@@ -62,6 +91,7 @@ class DeleteModal extends Component {
 
 const mapDispatchToProps = {
   deleteOrgFromChallenge,
+  deleteParticipant,
 };
 
 export default connect(null, mapDispatchToProps)(DeleteModal);
