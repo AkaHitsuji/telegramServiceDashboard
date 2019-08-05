@@ -10,7 +10,7 @@ import matchSorter from 'match-sorter';
 import {css} from '@emotion/core';
 import {Button, Icon} from 'semantic-ui-react';
 import {RiseLoader} from 'react-spinners';
-import NestedAddModal from 'components/modals/NestedAddModal';
+import AddModal from 'components/modals/AddModal';
 import DeleteModal from 'components/modals/DeleteModal';
 import UpdateModal from 'components/modals/UpdateModal';
 
@@ -49,6 +49,15 @@ class Dashboard extends Component {
       accessor: 'id',
       filterMethod: (filter, rows) => matchSorter(rows, filter.value, {keys: ['id']}),
       filterAll: true,
+    }, {
+      Header: 'DELETE',
+      filterable: false,
+      Cell: (props) => {
+        console.log('props:', props);
+        return (
+          <DeleteModal challenge={props.original.challenge} organiser={props.original.orgIndex}/>
+        );
+      },
     }];
 
     const organiserColumns = [{
@@ -61,6 +70,15 @@ class Dashboard extends Component {
       accessor: 'id',
       filterMethod: (filter, rows) => matchSorter(rows, filter.value, {keys: ['id']}),
       filterAll: true,
+    }, {
+      Header: 'DELETE',
+      filterable: false,
+      Cell: (props) => {
+        console.log('props:', props);
+        return (
+          <DeleteModal challenge={props.original.challenge} organiser={props.original.orgIndex}/>
+        );
+      },
     }];
 
     const challengeColumns = [{
@@ -160,7 +178,7 @@ class Dashboard extends Component {
       <div>
         <header className="App-header">
           <div className="button-container">
-            <div className="left-button"><NestedAddModal/></div>
+            <div className="left-button"><AddModal/></div>
             <div className="right-button"><UpdateModal/></div>
           </div>
           <div className='title-container'>

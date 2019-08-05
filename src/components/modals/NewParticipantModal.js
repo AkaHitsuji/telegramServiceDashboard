@@ -4,7 +4,7 @@ import {Button, Header, Icon, Modal, Form} from 'semantic-ui-react';
 
 import {addOrganiser} from 'actions';
 
-class NewOrganiserModal extends Component {
+class NewParticipantModal extends Component {
   state = {
     open: false,
     name: '',
@@ -25,11 +25,6 @@ class NewOrganiserModal extends Component {
     this.props.closeAddModal();
   }
 
-  countryOptions = [
-    {key: 's', text: 'Singapore', value: 'singapore'},
-    {key: 'h', text: 'Hong Kong', value: 'hongkong'},
-  ];
-
   setName = (e) => {
     this.setState({name: e.target.value});
   }
@@ -47,19 +42,20 @@ class NewOrganiserModal extends Component {
   render() {
     return (
       <React.Fragment>
-        <Button onClick={this.show} color="pink" inverted>Add New Organiser</Button>
+        <Button onClick={this.show} color="pink" inverted>Add New Participant</Button>
         <Modal
           open={this.state.open}
           onClose={this.close}
           basic
           size='large'
         >
-          <Header icon='group' content='Add New Organiser' />
+          <Header icon='chess pawn' content='Add New Participant' />
           <Modal.Content>
             <Form size='large' key='large' inverted>
               <Form.Input required fluid label='Name' onChange={this.setName} placeholder='Type your name here..' />
               <Form.Input required fluid label='Telegram Name' onChange={this.setTgName} placeholder='Type your Telegram username here..' />
-              <Form.Select label='Select Location' options={this.countryOptions} placeholder='Singapore' />
+              {/* TODO: setTgName change to set participant team name */}
+              <Form.Input required fluid label='Team Name' onChange={this.setTgName} placeholder='Type your Team Name here..' />
             </Form>
           </Modal.Content>
           <Modal.Actions>
@@ -80,4 +76,4 @@ const mapDispatchToProps = {
   addOrganiser,
 };
 
-export default connect(null, mapDispatchToProps)(NewOrganiserModal);
+export default connect(null, mapDispatchToProps)(NewParticipantModal);

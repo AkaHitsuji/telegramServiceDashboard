@@ -9,7 +9,7 @@
 }
 
 .App-header {
-  background-color: #60a9a6;
+  background-color: #17223b;
   height: 100px;
   display:flex;
   flex-direction:row;
@@ -66,22 +66,19 @@
 }
 
 .ui.olive.button {
-  background-color: #caf2d7 !important;
-  color: grey !important;
+  background-color: #77A710 !important;
 }
 
 .ui.brown.button {
-  background-color: #f5fec0 !important;
-  color: grey !important;
+  background-color: #FFC300 !important;
 }
 
 .ui.blue.button {
-  background-color: #fddede !important;
-  color: grey !important;
+  background-color: #900C3F !important;
 }
 
 .ui.violet.button {
-  background-color: #83142c !important;
+  background-color: #811F0D !important;
 }
 
 @keyframes App-logo-spin {
@@ -99,7 +96,7 @@
 }
 
 .ReactTable .rt-thead {
-  background-color: #6e9086;
+  background-color: #263859;
   color: white;
   font-weight: 700;
 }
