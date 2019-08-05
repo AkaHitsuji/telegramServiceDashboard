@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import axios from 'axios';
-import {getParticipantSnapshot, getOrganiserSnapshot, updateChallenges, getChallengesSnapshot, getOrgFromRef} from 'actions';
+import {getParticipantSnapshot, getOrganiserSnapshot, updateChallenges, getChallengesSnapshot} from 'actions';
 import ReactTable from 'react-table';
 import 'react-table/react-table.css';
 import {Tab, Tabs, TabList, TabPanel} from 'react-tabs';
@@ -99,9 +99,7 @@ class Dashboard extends Component {
     });
 
     const tabPanelList = this.props.challenges.map((challenge, index) => {
-      console.log(challenge);
       if (challenge.organisers.length > 0) {
-        console.log(challenge);
         const orgData = challenge.organisers.map((name, orgIndex) => {
           name['challenge'] = index;
           name['orgIndex'] = orgIndex;
@@ -160,7 +158,6 @@ class Dashboard extends Component {
   render() {
     return (
       <div>
-
         <header className="App-header">
           <div className="button-container">
             <div className="left-button"><NestedAddModal/></div>
@@ -192,7 +189,6 @@ const mapDispatchToProps = {
   getOrganiserSnapshot,
   getChallengesSnapshot,
   updateChallenges,
-  getOrgFromRef,
 };
 
 const mapStateToProps = (state) => {

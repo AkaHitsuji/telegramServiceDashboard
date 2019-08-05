@@ -1,8 +1,9 @@
-import {firestoreReducer} from 'redux-firestore';
 import snapshot from 'reducers/snapshot';
+import metadata from 'reducers/metadata';
+
 import {combineReducers} from 'redux';
 
 export default combineReducers({
-  snapshot: snapshot,
-  firebase: firestoreReducer,
+  snapshot,
+  metadata,
 });
