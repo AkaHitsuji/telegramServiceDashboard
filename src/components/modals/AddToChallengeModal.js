@@ -21,6 +21,7 @@ class AddToChallengeModal extends Component {
     this.setState({
       open: false,
     });
+    this.props.closeAddModal();
   }
 
   addOrganiser = () => {

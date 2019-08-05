@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
 import {Message, Icon} from 'semantic-ui-react';
 
-class LoadingMessage extends Component {
+class SuccessMessage extends Component {
   render() {
     return (
-      <Message warning icon floating>
-        <Icon name='circle notched' loading />
+      <Message success icon>
+        <Icon name='thumbs up' />
         <Message.Content>
           {this.props.message}
         </Message.Content>
@@ -14,4 +14,4 @@ class LoadingMessage extends Component {
   }
 }
 
-export default LoadingMessage;
+export default SuccessMessage;
