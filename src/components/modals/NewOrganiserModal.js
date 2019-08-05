@@ -38,10 +38,15 @@ class NewOrganiserModal extends Component {
     this.setState({tgName: e.target.value});
   }
 
+  setLocationChoice = (e, {value}) => {
+    this.setState({locationChoice: value});
+  }
+
+
   addOrg = () => {
     this.close();
-    const {name, tgName} = this.state;
-    this.props.addOrganiser(name, tgName);
+    const {name, tgName, locationChoice} = this.state;
+    this.props.addOrganiser(name, tgName, locationChoice);
   }
 
   render() {
@@ -59,7 +64,7 @@ class NewOrganiserModal extends Component {
             <Form size='large' key='large' inverted>
               <Form.Input required fluid label='Name' onChange={this.setName} placeholder='Type your name here..' />
               <Form.Input required fluid label='Telegram Name' onChange={this.setTgName} placeholder='Type your Telegram username here..' />
-              <Form.Select label='Select Location' options={this.countryOptions} placeholder='Singapore' />
+              <Form.Select label='Select Location' options={this.countryOptions} onChange={this.setLocationChoice} placeholder='Singapore' />
             </Form>
           </Modal.Content>
           <Modal.Actions>

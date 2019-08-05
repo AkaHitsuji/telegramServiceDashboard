@@ -52,9 +52,8 @@ class Dashboard extends Component {
       Header: 'DELETE',
       filterable: false,
       Cell: (props) => {
-        console.log('props:', props);
         return (
-          <DeleteModal challenge={props.original.challenge} organiser={props.original.orgIndex}/>
+          <DeleteModal type='participant' participant={props.original.id}/>
         );
       },
     }];
@@ -73,9 +72,8 @@ class Dashboard extends Component {
       Header: 'DELETE',
       filterable: false,
       Cell: (props) => {
-        console.log('props:', props);
         return (
-          <DeleteModal challenge={props.original.challenge} organiser={props.original.orgIndex}/>
+          <DeleteModal type='organiser' challenge={props.original.challenge} organiser={props.original.orgIndex}/>
         );
       },
     }];
@@ -87,21 +85,21 @@ class Dashboard extends Component {
       filterAll: true,
     }, {
       Header: 'TELEGRAM NAME',
-      accessor: 'name',
-      filterMethod: (filter, rows) => matchSorter(rows, filter.value, {keys: ['name']}),
+      accessor: 'id',
+      filterMethod: (filter, rows) => matchSorter(rows, filter.value, {keys: ['id']}),
       filterAll: true,
     }, {
       Header: 'LOCATION',
-      accessor: 'name',
+      accessor: 'location',
       filterMethod: (filter, rows) => matchSorter(rows, filter.value, {keys: ['name']}),
       filterAll: true,
     }, {
       Header: 'DELETE',
       filterable: false,
       Cell: (props) => {
-        console.log('props:', props);
+        console.log('props', props);
         return (
-          <DeleteModal challenge={props.original.challenge} organiser={props.original.orgIndex}/>
+          <DeleteModal type='challenge' challenge={props.original.challenge} organiser={props.original.orgIndex}/>
         );
       },
     }];
