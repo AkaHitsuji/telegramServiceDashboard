@@ -29,7 +29,7 @@ class UpdateModal extends Component {
   render() {
     return (
       <React.Fragment>
-        <Button className='button-style' onClick={this.show} color='olive' animated='vertical' size='large'>
+        <Button className='button-style' onClick={this.show} color='brown' animated='vertical' size='large'>
           <Button.Content visible><Icon name='sync alternate' />Update</Button.Content>
           <Button.Content hidden>Update Challenges</Button.Content>
         </Button>

@@ -29,7 +29,7 @@ class DeleteModal extends Component {
   render() {
     return (
       <div>
-        <Button onClick={this.show} color='red' animated='vertical'>
+        <Button onClick={this.show} color='violet' animated='vertical'>
           <Button.Content visible>Delete</Button.Content>
           <Button.Content hidden><Icon name='trash alternate' /></Button.Content>
         </Button>
