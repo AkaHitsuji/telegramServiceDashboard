@@ -10,6 +10,7 @@ import matchSorter from 'match-sorter';
 import {css} from '@emotion/core';
 import {Button, Icon} from 'semantic-ui-react';
 import {RiseLoader} from 'react-spinners';
+import OrgChallengeArray from 'components/OrgChallengeArray';
 import AddModal from 'components/modals/AddModal';
 import DeleteModal from 'components/modals/DeleteModal';
 import UpdateModal from 'components/modals/UpdateModal';
@@ -68,6 +69,15 @@ class Dashboard extends Component {
       accessor: 'id',
       filterMethod: (filter, rows) => matchSorter(rows, filter.value, {keys: ['id']}),
       filterAll: true,
+    },
+    {
+      Header: 'Challenges',
+      filterable: false,
+      Cell: (props) => {
+        return (
+          <OrgChallengeArray organiserID={props.original.id} />
+        );
+      },
     }, {
       Header: 'DELETE',
       filterable: false,
