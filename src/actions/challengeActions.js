@@ -53,7 +53,7 @@ export const getChallengesSnapshot = async () => {
 export const updateChallenges = (docs) => {
   return (dispatch, getState, {getFirestore}) => {
     console.log('updating challenges');
-    dispatch({action: LOADING_TRUE, payload: 'Importing challenges'});
+    dispatch({type: LOADING_TRUE, payload: 'Importing challenges'});
     const state = getState();
     const challenges = state.snapshot.challenges;
     const challengeNames = challenges.map((chal) => {

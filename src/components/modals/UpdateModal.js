@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
+import axios from 'axios';
 import {Button, Header, Icon, Modal} from 'semantic-ui-react';
 import {connect} from 'react-redux';
 
-import {deleteOrgFromChallenge} from 'actions';
+import {updateChallenges} from 'actions';
 
 class UpdateModal extends Component {
   state = {
@@ -21,9 +22,12 @@ class UpdateModal extends Component {
     });
   }
 
-  delete = () => {
+  update = () => {
     this.close();
-    this.props.deleteOrgFromChallenge(this.props.challenge, this.props.organiser);
+    axios.get('https://codeit-suisse-coordinator2019.herokuapp.com/api/challenges').then((res) => {
+      this.props.updateChallenges(res.data);
+    });
+    // this.props.deleteOrgFromChallenge(this.props.challenge, this.props.organiser);
   }
 
   render() {
@@ -50,7 +54,7 @@ class UpdateModal extends Component {
             <Button color='red' inverted onClick={this.close}>
               <Icon name='remove' /> No
             </Button>
-            <Button color='green' inverted onClick={this.delete}>
+            <Button color='green' inverted onClick={this.update}>
               <Icon name='checkmark' /> Yes
             </Button>
           </Modal.Actions>
@@ -61,7 +65,7 @@ class UpdateModal extends Component {
 }
 
 const mapDispatchToProps = {
-  deleteOrgFromChallenge,
+  updateChallenges,
 };
 
 export default connect(null, mapDispatchToProps)(UpdateModal);
