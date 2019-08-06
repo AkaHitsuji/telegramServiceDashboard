@@ -3,6 +3,6 @@ export {getChallengesSnapshot, updateChallenges, deleteOrgFromChallenge, addOrgT
 
 export {getParticipantSnapshot, addParticipants, deleteParticipant} from 'actions/participantActions';
 
-export {getOrganiserSnapshot, addOrganiser} from 'actions/organiserActions';
+export {getOrganiserSnapshot, addOrganiser, deleteOrganiser} from 'actions/organiserActions';
 
 export {performAuthentication, signOut} from 'actions/authenticationAction';

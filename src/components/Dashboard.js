@@ -72,8 +72,9 @@ class Dashboard extends Component {
       Header: 'DELETE',
       filterable: false,
       Cell: (props) => {
+        console.log(props.original);
         return (
-          <DeleteModal type='organiser' challenge={props.original.challenge} organiser={props.original.orgIndex}/>
+          <DeleteModal type='organiser' organiser={props.original.id}/>
         );
       },
     }];
