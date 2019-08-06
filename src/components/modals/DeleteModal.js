@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Button, Header, Icon, Modal} from 'semantic-ui-react';
 import {connect} from 'react-redux';
 
-import {deleteOrgFromChallenge, deleteParticipant} from 'actions';
+import {deleteOrgFromChallenge, deleteParticipant, deleteOrganiser} from 'actions';
 
 class DeleteModal extends Component {
   state = {
@@ -19,7 +19,8 @@ class DeleteModal extends Component {
         this.setState({content: 'Do you want to remove this organiser?'});
         break;
       case 'challenge':
-        this.setState({content: 'Are you sure you want to remove (this organiser) from challenge {this.props.challenge + 1}?'});
+        const content = `Are you sure you want to remove this organiser from challenge ${this.props.challenge + 1}?`;
+        this.setState({content});
         break;
       default:
         break;
@@ -45,7 +46,7 @@ class DeleteModal extends Component {
         this.props.deleteParticipant(this.props.participant);
         break;
       case 'organiser':
-        this.setState({content: 'Do you want to remove this organiser?'});
+        this.props.deleteOrganiser(this.props.organiser);
         break;
       case 'challenge':
         this.props.deleteOrgFromChallenge(this.props.challenge, this.props.organiser);
@@ -92,6 +93,7 @@ class DeleteModal extends Component {
 const mapDispatchToProps = {
   deleteOrgFromChallenge,
   deleteParticipant,
+  deleteOrganiser,
 };
 
 export default connect(null, mapDispatchToProps)(DeleteModal);
