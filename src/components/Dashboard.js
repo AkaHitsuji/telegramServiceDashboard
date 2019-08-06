@@ -50,6 +50,11 @@ class Dashboard extends Component {
       filterMethod: (filter, rows) => matchSorter(rows, filter.value, {keys: ['id']}),
       filterAll: true,
     }, {
+      Header: 'TEAM NAME',
+      accessor: 'team',
+      filterMethod: (filter, rows) => matchSorter(rows, filter.value, {keys: ['team']}),
+      filterAll: true,
+    }, {
       Header: 'DELETE',
       filterable: false,
       Cell: (props) => {
