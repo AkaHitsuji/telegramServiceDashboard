@@ -54,7 +54,6 @@ export const deleteOrganiser = (id) => {
         });
         return organisers.includes(id);
       });
-      console.log(challenges);
 
       const sendChallenges = async () => {
         return await Promise.all(challenges.map((chal) => challengeUpdate(chal, id, firestore)));

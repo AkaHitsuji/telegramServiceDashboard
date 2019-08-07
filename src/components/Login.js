@@ -10,7 +10,6 @@ import {performAuthentication} from 'actions';
 
 class Login extends Component {
   handleSubmit = (event) => {
-    console.log(this.username.value);
     event.preventDefault();
     this.props.performAuthentication(this.username.value, this.password.value);
   }

@@ -18,7 +18,6 @@ export default function(state = defaultState, action) {
       return Object.assign({}, obj);
     case GET_CHAL_SNAPSHOT:
       obj = defaultState;
-      console.log(action.payload);
       obj.challenges = action.payload;
       return Object.assign({}, obj);
     default:

@@ -35,7 +35,6 @@ export const signOut = () => {
 };
 
 const getUser = async (firestore, username) => {
-  console.log(username);
   const result = await firestore.collection('organisers').doc(username).get();
   return result.exists;
 };
