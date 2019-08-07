@@ -87,7 +87,6 @@ class Dashboard extends Component {
       Header: 'DELETE',
       filterable: false,
       Cell: (props) => {
-        console.log(props.original);
         return (
           <DeleteModal type='organiser' organiser={props.original.id}/>
         );
@@ -113,7 +112,6 @@ class Dashboard extends Component {
       Header: 'DELETE',
       filterable: false,
       Cell: (props) => {
-        console.log('props', props);
         return (
           <DeleteModal type='challenge' challenge={props.original.challenge} organiser={props.original.orgIndex}/>
         );
@@ -125,8 +123,8 @@ class Dashboard extends Component {
       margin: 0 auto;
       border-color: #FFC900;`;
 
-    const challengeTabList = this.props.challenges.map((challenge, index) => {
-      return <Tab> Challenge {index+1}</Tab>;
+    const challengeTabList = this.props.challenges.map((challenge) => {
+      return <Tab>{challenge.id}</Tab>;
     });
 
     const tabPanelList = this.props.challenges.map((challenge, index) => {

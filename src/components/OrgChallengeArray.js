@@ -10,7 +10,6 @@ function OrgChallengeArray({challenges, organiserID}) {
       }
     });
   });
-  console.log(orgChallenges);
 
   return (
     <p>{orgChallenges.join(', ')}</p>

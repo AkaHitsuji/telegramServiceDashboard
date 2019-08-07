@@ -37,9 +37,7 @@ export const getChallengesSnapshot = async () => {
             dat['id'] = doc.id;
             documents.push(dat);
           });
-          console.log(documents);
           getOrgFromRef(documents).then((dat) => {
-            console.log(dat);
             dispatch({type: LOADING_FALSE});
             dispatch({type: GET_CHAL_SNAPSHOT, payload: dat});
           });
